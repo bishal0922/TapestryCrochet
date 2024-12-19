@@ -42,7 +42,6 @@ const PatternCreatorContent = () => {
       dispatch({ type: 'SET_COLOR_PALETTE', payload: result.colorPalette });
     } catch (error) {
       console.error('Failed to process image:', error);
-      // Here you could add a toast notification for error handling
     }
   };
 
@@ -54,6 +53,7 @@ const PatternCreatorContent = () => {
             <Card>
               <CardContent className="p-6">
                 <div className="space-y-4">
+                  {/* Image Upload Section */}
                   <div className="space-y-2">
                     <Label htmlFor="imageUpload">Upload Pattern Image</Label>
                     <div className="flex items-center gap-4">
@@ -82,13 +82,17 @@ const PatternCreatorContent = () => {
                     )}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4">
+                  {/* Grid and Color Settings with Sliders */}
+                  <div className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="gridWidth">Width</Label>
-                      <Input
+                      <div className="flex justify-between">
+                        <Label htmlFor="gridWidth">Width: {gridDimensions.width}</Label>
+                        <span className="text-sm text-muted-foreground">20-100</span>
+                      </div>
+                      <input
                         id="gridWidth"
-                        type="number"
-                        min="1"
+                        type="range"
+                        min="20"
                         max="100"
                         value={gridDimensions.width}
                         onChange={(e) => dispatch({
@@ -98,14 +102,19 @@ const PatternCreatorContent = () => {
                             width: parseInt(e.target.value)
                           }
                         })}
+                        className="w-full"
                       />
                     </div>
+
                     <div className="space-y-2">
-                      <Label htmlFor="gridHeight">Height</Label>
-                      <Input
+                      <div className="flex justify-between">
+                        <Label htmlFor="gridHeight">Height: {gridDimensions.height}</Label>
+                        <span className="text-sm text-muted-foreground">20-100</span>
+                      </div>
+                      <input
                         id="gridHeight"
-                        type="number"
-                        min="1"
+                        type="range"
+                        min="20"
                         max="100"
                         value={gridDimensions.height}
                         onChange={(e) => dispatch({
@@ -115,6 +124,26 @@ const PatternCreatorContent = () => {
                             height: parseInt(e.target.value)
                           }
                         })}
+                        className="w-full"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <Label htmlFor="numColors">Number of Colors: {numColors}</Label>
+                        <span className="text-sm text-muted-foreground">2-8</span>
+                      </div>
+                      <input
+                        id="numColors"
+                        type="range"
+                        min="2"
+                        max="8"
+                        value={numColors}
+                        onChange={(e) => dispatch({
+                          type: 'SET_NUM_COLORS',
+                          payload: parseInt(e.target.value)
+                        })}
+                        className="w-full"
                       />
                     </div>
                   </div>

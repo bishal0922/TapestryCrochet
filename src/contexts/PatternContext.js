@@ -39,7 +39,9 @@ function patternReducer(state, action) {
         redoStack: []
       };
     case 'SET_GRID_DIMENSIONS':
-      return { ...state, gridDimensions: action.payload };
+        return { ...state, gridDimensions: action.payload };
+    case 'SET_NUM_COLORS':
+        return { ...state, numColors: action.payload };
     case 'SET_COLOR_PALETTE':
       return { ...state, colorPalette: action.payload };
     case 'UPDATE_COLOR':
